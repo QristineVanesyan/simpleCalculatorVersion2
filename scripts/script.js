@@ -9,7 +9,7 @@ const num7 = document.getElementById("btn-num7");
 const num8 = document.getElementById("btn-num8");
 const num9 = document.getElementById("btn-num9");*/
 let count = 0;
-let number = 0;
+let number="";
 const division = document.getElementById("btn-division");
 const multiplication = document.getElementById("btn-multiplication");
 const minus = document.getElementById("btn-minus");
@@ -35,24 +35,25 @@ function f()
         case "btn-num8":
         case "btn-num9":
         case "btn-num0":{
-           number = event.target.value;
+           number += event.target.value;
+           console.log(number);
         break;
         }
         case "btn-multiplication":
         {
-            count*=number;  break;
+            count*=parseInt(number);  break;
         }
         case "btn-division":
         {
-            count/=number;  break;
+            count/=parseInt(number);  break;
         }
         case "btn-plus":
         {
-            count+=number;  break;
+            count+=parseInt(number);  break;
         }
         case "btn-minus":
         {
-            count-=number;  break;
+            count-=parseInt(number);  break;
         }
 
     }

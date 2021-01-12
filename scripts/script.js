@@ -9,20 +9,16 @@ const num7 = document.getElementById("btn-num7");
 const num8 = document.getElementById("btn-num8");
 const num9 = document.getElementById("btn-num9");*/
 let count = 0;
-let number="";
-const division = document.getElementById("btn-division");
-const multiplication = document.getElementById("btn-multiplication");
-const minus = document.getElementById("btn-minus");
-const plus = document.getElementById("btn-plus");
-
-const cancel = document.getElementById("btn-cancel");
-const equal = document.getElementById("btn-equal");
+let flag = false;
+let flag1 = false;
+let flag3 = false;
+let number = "";
+let sign = "";
 
 let btn = document.getElementsByClassName(".button");
-
 const wrapper = document.getElementById('wrapper');
-function f()
-{
+
+function f() {
     const isButton = event.target.nodeName === 'BUTTON';
     switch (event.target.id) {
         case "btn-num1":
@@ -34,59 +30,103 @@ function f()
         case "btn-num7":
         case "btn-num8":
         case "btn-num9":
-        case "btn-num0":{
-           number += event.target.value;
-           console.log(number);
-        break;
+        case "btn-num0": {
+            number += event.target.value;
+            document.getElementById("number").value = number;
+            break;
         }
-        case "btn-multiplication":
-        {
-            count*=parseInt(number);  break;
+        case "btn-plus": {
+            sign = "+";
+            if (!number) {
+                number = 0;
+            }
+            count += parseInt(number);
+            document.getElementById("number").value = count;
+            number = "";
+            break;
         }
-        case "btn-division":
-        {
-            count/=parseInt(number);  break;
+        case "btn-division": {
+            sign = "/";
+            if (!number) {
+                number = 1;
+            }
+            if (flag3 === false) {
+                count += parseInt(number);
+                flag3 = true;
+            } else {
+                count /= parseInt(number);
+                document.getElementById("number").value = count;
+            }
+            number = "";
+            break;
         }
-        case "btn-plus":
-        {
-            count+=parseInt(number);  break;
+        case "btn-multiplication": {
+            sign = "*";
+            if (!number) {
+                number = 0;
+            }
+            if (flag1 === false) {
+                count += parseInt(number);
+                flag1 = true;
+            } else {
+                count *= parseInt(number);
+                document.getElementById("number").value = count;
+            }
+            number = "";
+            break;
         }
-        case "btn-minus":
-        {
-            count-=parseInt(number);  break;
-        }
+        case "btn-minus": {
+            sign = "-";
+            if (!number) {
+                number = 0;
+            }
+            if (flag === false) {
+                count += parseInt(number);
+                flag = true;
+            } else {
+                count -= parseInt(number);
 
+                document.getElementById("number").value = count;
+            }
+            number = "";
+            break;
+        }
+        case "btn-equal": {
+            if (sign === "+") {
+                if (!number) {
+                    number = 0;
+                }
+                count += parseInt(number);
+                document.getElementById("number").value = count;
+                number = "";
+            } else if (sign === "-") {
+                if (!number) {
+                    number = 0;
+                }
+                count -= parseInt(number);
+                document.getElementById("number").value = count;
+                number = "";
+            } else if (sign === "*") {
+                if (!number) {
+                    number = 0;
+                }
+                count *= parseInt(number);
+                document.getElementById("number").value = count;
+                number = "";
+            } else if (sign === "/") {
+                debugger;
+                if (!number) {
+                    number = 1;
+                }
+                count /= parseInt(number);
+                document.getElementById("number").value = count;
+                number = "";
+            }
+            break;
+        }
     }
-console.log(count);
 }
-wrapper.addEventListener("click",f)
 
-/*console.log(num9);
-console.log(num8);
-console.log(num7);
-console.log(num6);
-console.log(num5);
-console.log(num4);
-console.log(num3);
-console.log(num2);
-console.log(num1);
-console.log(num0);*/
-console.log(multiplication);
-console.log(division);
-console.log(plus);
-console.log(minus);
-
-
-
-
-
-
-
-
-
-
-
-
-
+wrapper.addEventListener("click", f)
 
 
